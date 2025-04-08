@@ -14,7 +14,7 @@ export default function ListEntriesComponent() {
 
   const refreshEntries = () => {
     setLoading(true);
-    getAllEntriesFromApi(username)
+    getAllEntriesFromApi()
       .then((res) => setEntries(res.data))
       .catch((err) => {
         console.error(err);
@@ -29,7 +29,7 @@ export default function ListEntriesComponent() {
 
   const deleteEntry = (id) => {
     if (window.confirm("Are you sure you want to delete this entry?")) {
-      deleteEntryApi(username, id)
+      deleteEntryApi(id)
         .then(() => {
           setMessage(`Deleted Entry with ID: ${id}`);
           refreshEntries();

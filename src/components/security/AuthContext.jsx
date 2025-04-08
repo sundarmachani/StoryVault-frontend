@@ -8,8 +8,13 @@ export const useAuth = () => useContext(AuthContext);
 apiClient.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
-    config.headers.Authorization = token;
+    config.headers.Authorization = `Bearer ${token.replace(/^Bearer\s+/, '')}`;
   }
+
+  if (!config.headers["Content-Type"]) {
+    config.headers["Content-Type"] = "application/json";
+  }
+
   return config;
 });
 

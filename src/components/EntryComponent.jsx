@@ -21,7 +21,7 @@ export default function EntryComponent() {
   useEffect(() => {
     if (id !== "-1") {
       setLoading(true);
-      getEntryByIdApi(username, id)
+      getEntryByIdApi(id)
         .then((res) => {
           setDescription(res.data.description || "");
           setDate(res.data.entryDate || "");
@@ -41,7 +41,7 @@ export default function EntryComponent() {
       entryDate: values.date,
     };
     if (id === "-1") {
-      createNewEntryApi(username, diary)
+      createNewEntryApi(diary)
         .then(() => navigate("/entries"))
         .catch((err) => {
           console.error(err);
@@ -50,7 +50,7 @@ export default function EntryComponent() {
         .finally(() => setLoading(false));
     } else {
       const updatedDiary = { id, ...diary };
-      updateEntryApi(username, updatedDiary)
+      updateEntryApi(updatedDiary)
         .then(() => navigate("/entries"))
         .catch((err) => {
           console.error(err);
