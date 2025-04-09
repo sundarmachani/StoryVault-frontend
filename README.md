@@ -1,13 +1,16 @@
 # StoryVault Application
 
 ## Overview
+
 StoryVault is a full-stack diary application consisting of two separate repositories: **StoryVault-backend** and **Storyvault-frontend**.
+
 - **StoryVault-backend** is a Spring Boot application (Java 21) that provides secure RESTful APIs using JWT authentication, integrates Swagger for API documentation, and uses PostgreSQL for data storage.
 - **Storyvault-frontend** is a ReactJS application that delivers a modern, responsive user interface for user authentication (login and registration) and diary entry management.
 
 ## Features
 
 ### Backend (StoryVault-backend)
+
 - **Secure Authentication:** Uses JWT tokens to secure API endpoints.
 - **User Registration:** Validates email addresses and enforces strong password criteria.
 - **Diary Management:** CRUD operations for diary entries.
@@ -16,6 +19,7 @@ StoryVault is a full-stack diary application consisting of two separate reposito
 - **Technologies:** Java 21, Spring Boot, Maven.
 
 ### Frontend (Storyvault-frontend)
+
 - **User Interface:** Responsive design built with ReactJS.
 - **Routing & Navigation:** Uses React Router for smooth navigation.
 - **Authentication & Registration:** Forms with client-side validations for email and password strength.
@@ -25,9 +29,11 @@ StoryVault is a full-stack diary application consisting of two separate reposito
 - **Technologies:** ReactJS, Axios, React Router, CSS.
 
 ## Project Structure
+
 The project is maintained as two separate repositories:
 
 **StoryVault-backend**
+
 ```
 StoryVault-backend/
 ├── src/main/java/           # Java source code (controllers, services, models, security, etc.)
@@ -36,6 +42,7 @@ StoryVault-backend/
 ```
 
 **Storyvault-frontend**
+
 ```
 Storyvault-frontend/
 ├── public/                  # Static assets (index.html, favicon, etc.)
@@ -46,12 +53,15 @@ Storyvault-frontend/
 ## Setup Instructions
 
 ### Prerequisites
+
 - **Backend:** Java 21, Maven, PostgreSQL.
 - **Frontend:** Node.js and npm.
 
 ### Backend Setup (StoryVault-backend)
+
 1. **Configure Database:**  
    Edit `src/main/resources/application.properties` and set your PostgreSQL connection details:
+
    ```properties
    spring.datasource.url=jdbc:postgresql://localhost:5432/
    spring.datasource.username=
@@ -61,6 +71,7 @@ Storyvault-frontend/
    ```
 
 2. **Build and Run:**
+
    ```bash
    cd StoryVault-backend
    mvn clean install
@@ -74,13 +85,16 @@ Storyvault-frontend/
    ```
 
 ### Frontend Setup (Storyvault-frontend)
+
 1. **Install Dependencies:**
+
    ```bash
    cd Storyvault-frontend
    npm install
    ```
 
 2. **Start the Development Server:**
+
    ```bash
    npm run dev
    ```
@@ -91,6 +105,7 @@ Storyvault-frontend/
 ## Environment Variables (Frontend)
 
 Create a `.env` file in the root of the Storyvault-frontend repository:
+
 ```
 REACT_APP_API_BASE_URL=http://localhost:8080
 ```
@@ -98,6 +113,7 @@ REACT_APP_API_BASE_URL=http://localhost:8080
 ## API Endpoints (Backend)
 
 ### Authentication & Registration
+
 - **POST /authenticate**
   Authenticates user credentials and returns a JWT token.
 - **POST /register**
@@ -112,17 +128,18 @@ REACT_APP_API_BASE_URL=http://localhost:8080
 
 ### Diary Entry Endpoints
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| /new-entry | POST | Create a new diary entry |
-| /get-all | GET | Retrieve all diary entries |
-| /get-entry/{id} | GET | Retrieve a diary entry by ID |
-| /update-entry | PUT | Update an existing diary entry |
-| /delete-entry/{id} | DELETE | Delete a diary entry by ID |
+| Endpoint           | Method | Description                    |
+| ------------------ | ------ | ------------------------------ |
+| /new-entry         | POST   | Create a new diary entry       |
+| /get-all           | GET    | Retrieve all diary entries     |
+| /get-entry/{id}    | GET    | Retrieve a diary entry by ID   |
+| /update-entry      | PUT    | Update an existing diary entry |
+| /delete-entry/{id} | DELETE | Delete a diary entry by ID     |
 
 ## Deployment
 
 ### Frontend Deployment (Vercel)
+
 1. **Push Code:**
    Push the Storyvault-frontend code to GitHub.
 2. **Vercel Setup:**
@@ -133,29 +150,33 @@ REACT_APP_API_BASE_URL=http://localhost:8080
 3. **Deploy:**
    Vercel will deploy the frontend and provide a live URL.
 
-### Backend Deployment (AWS)
+### Backend Deployment (Render)
 
-#### Option A: AWS Elastic Beanstalk
-1. **Package the Application:**
-   Build the Spring Boot application as an executable JAR.
-2. **Create an Environment:**
-   In the AWS Console, create an Elastic Beanstalk environment using the Java platform.
-3. **Upload and Configure:**
-   - Upload the JAR file.
-   - Set environment variables for your PostgreSQL connection (e.g., DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD).
-4. **Monitor Deployment:**
-   Use the Elastic Beanstalk dashboard to monitor logs and application health.
+1. **Create a Web Service:**
+   - Sign up or log in to Render.
+   - Create a new Web Service and select your GitHub repository.
+   - Choose the Java runtime environment.
+   - Set the build command (e.g., `./mvnw clean install`).
+   - Set the start command (e.g., `java -jar target/storyvault-backend.jar`).
+2. **Configure Environment Variables:**
+   - Set environment variables for your PostgreSQL connection (from Render PostgreSQL instance).
+   - Add any other necessary environment variables like JWT secret.
+3. **Deploy:**
+   - Render will automatically build and deploy your application.
+   - Monitor the deployment logs to ensure everything starts correctly.
 
-#### Option B: AWS EC2
-- Set up an EC2 instance, install Java, and run the Spring Boot application manually with appropriate security group settings.
+### Database (Render PostgreSQL)
 
-### Database (AWS RDS)
-- **Create an RDS Instance:**
-  Use the AWS RDS free tier (if eligible) to create a PostgreSQL instance.
-- **Configure Security:**
-  Ensure your backend can connect to RDS via proper security group configurations.
+1. **Create a PostgreSQL Instance:**
+   - In the Render dashboard, create a new PostgreSQL database.
+   - Note the connection details (host, port, database name, username, password).
+2. **Configure Connection:**
+   - Add the PostgreSQL connection details as environment variables in your Render Web Service configuration.
+3. **Security:**
+   - Render automatically secures the connection between your web service and database when both are hosted on Render.
 
 ## Running the Application Locally
+
 1. **Start the Backend:**
    Follow the Backend Setup instructions in the StoryVault-backend repository.
 2. **Start the Frontend:**
@@ -167,6 +188,7 @@ REACT_APP_API_BASE_URL=http://localhost:8080
      - Password: password
 
 ## Future Enhancements
+
 - Implement role-based access control and advanced user management.
 - Add pagination and search functionality for diary entries.
 - Enhance the UI with additional themes and animations.

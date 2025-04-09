@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllEntriesFromApi, deleteEntryApi } from "./api/DiaryApiService";
 import { useAuth } from "./security/AuthContext";

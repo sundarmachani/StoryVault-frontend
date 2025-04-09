@@ -1,5 +1,4 @@
-// DiaryApp.jsx
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import AuthProvider, { useAuth } from "./security/AuthContext";
 import HeaderComponent from "./HeaderComponent";
@@ -13,6 +12,7 @@ const EntryComponent = lazy(() => import("./EntryComponent"));
 const LogoutComponent = lazy(() => import("./LogoutComponent"));
 const ErrorComponent = lazy(() => import("./ErrorComponent"));
 
+// eslint-disable-next-line react/prop-types
 function AuthenticatedRoute({ children }) {
   const authContext = useAuth();
   return authContext.isAuthenticated ? children : <Navigate to="/login" />;

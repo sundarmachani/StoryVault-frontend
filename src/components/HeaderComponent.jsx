@@ -1,5 +1,4 @@
-// HeaderComponent.jsx
-import React from "react";
+import "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "./security/AuthContext";
 
